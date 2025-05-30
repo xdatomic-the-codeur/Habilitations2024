@@ -19,9 +19,9 @@ namespace Habilitations2024.controller
             profilAccess = new ProfilAccess();
         }
 
-        public List<Developpeur> GetLesDeveloppeurs()
+        public List<Developpeur> GetLesDeveloppeurs(string profilName = null)
         {
-            return developpeurAccess.GetLesDeveloppeurs();
+            return developpeurAccess.GetLesDeveloppeurs(profilName);
         }
 
         public List<Profil> GetLesProfils()

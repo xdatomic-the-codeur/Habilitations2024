@@ -16,18 +16,32 @@ namespace Habilitations2024.dal
             access = Access.GetInstance();
         }
 
-        public List<Developpeur> GetLesDeveloppeurs()
+        public List<Developpeur> GetLesDeveloppeurs(string profilName = null)
         {
             List<Developpeur> lesDeveloppeurs = new List<Developpeur>();
             if (access.Manager != null)
             {
                 string requete = "SELECT d.iddeveloppeur as iddeveloppeur, d.nom as nom, d.prenom as prenom, d.tel as tel, d.mail as mail, p.idprofil as idprofil, p.nom as profil ";
                 requete += "FROM developpeur d join profil p on (d.idprofil = p.idprofil) ";
+                Dictionary<string, object> parameters = null;
+
+                if (!string.IsNullOrWhiteSpace(profilName) && profilName != "All" && profilName != " ")
+                {
+                    requete += "WHERE p.nom = @profilName ";
+                    parameters = new Dictionary<string, object>
+                    {
+                        { "@profilName", profilName }
+                    };
+                }
+
                 requete += "ORDER BY nom, prenom;";
 
                 try
                 {
-                    List<Object[]> resultats = access.Manager.ReqSelect(requete);
+                    List<Object[]> resultats = parameters != null ?
+                        access.Manager.ReqSelect(requete, parameters) :
+                        access.Manager.ReqSelect(requete);
+
                     if (resultats != null)
                     {
                         foreach (Object[] resultat in resultats)
@@ -173,6 +187,32 @@ namespace Habilitations2024.dal
                 return false;
             }
             return false;
+        }
+
+        public int GetNumDevByProfile(Profil profil)
+        {
+            if (access.Manager != null)
+            {
+                string req = "SELECT COUNT(*) FROM developpeur WHERE idprofil = @idprofil;";
+                var parameters = new Dictionary<string, object>
+                {
+                    { "@idprofil", profil.Idprofil }
+                };
+                try
+                {
+                    List<Object[]> resultats = access.Manager.ReqSelect(req, parameters);
+                    if (resultats != null && resultats.Count > 0)
+                    {
+                        return Convert.ToInt32(resultats[0][0]);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Erreur lors de la récupération du nombre de développeurs par profil : " + e.Message);
+                    Environment.Exit(0);
+                }
+            }
+            return 0;
         }
     }
 }

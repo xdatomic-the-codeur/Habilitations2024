@@ -33,14 +33,20 @@ namespace Habilitations2024.view
             // Remplissage de la liste des profils
             var listeProfils = controller.GetLesProfils();
             cbProfil.DataSource = listeProfils;
+
+            // Remplir cbFiltre avec les profils
+            cbFiltre.DataSource = new List<Profil> { new Profil(0, " ") }.Concat(listeProfils).ToList();
+            cbFiltre.DisplayMember = "Nom";
+
         }
 
         /// <summary>
         /// Remplit le DataGridView avec la liste des développeurs
         /// </summary>
-        private void RemplirListeDeveloppeurs()
+        private void RemplirListeDeveloppeurs(string filtre = "All")
         {
-            var lesDeveloppeurs = controller.GetLesDeveloppeurs();
+            var lesDeveloppeurs = controller.GetLesDeveloppeurs(filtre);
+
             bdgDeveloppeurs.DataSource = lesDeveloppeurs;
 
             // Projection pour n'afficher que les colonnes utiles
@@ -208,6 +214,11 @@ namespace Habilitations2024.view
             developpersGroup.Enabled = true;
             txtPwd.Clear();
             txtPwdConfirm.Clear();
+        }
+
+        private void cbFiltre_SelectedValueChanged(object sender, EventArgs e)
+        {
+            RemplirListeDeveloppeurs(cbFiltre.SelectedValue.ToString());
         }
     }
 }

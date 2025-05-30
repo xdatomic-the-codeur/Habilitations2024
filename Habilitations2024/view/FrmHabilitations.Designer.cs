@@ -54,6 +54,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.txtPwd = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cbFiltre = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.developpersGroup.SuspendLayout();
             this.addDev.SuspendLayout();
@@ -117,6 +119,8 @@
             // 
             // addDev
             // 
+            this.addDev.Controls.Add(this.cbFiltre);
+            this.addDev.Controls.Add(this.label8);
             this.addDev.Controls.Add(this.cancelDevBTN);
             this.addDev.Controls.Add(this.saveDevBTN);
             this.addDev.Controls.Add(this.cbProfil);
@@ -131,14 +135,14 @@
             this.addDev.Controls.Add(this.txtNom);
             this.addDev.Location = new System.Drawing.Point(13, 388);
             this.addDev.Name = "addDev";
-            this.addDev.Size = new System.Drawing.Size(775, 116);
+            this.addDev.Size = new System.Drawing.Size(775, 157);
             this.addDev.TabIndex = 2;
             this.addDev.TabStop = false;
             this.addDev.Text = "Ajouter développeur";
             // 
             // cancelDevBTN
             // 
-            this.cancelDevBTN.Location = new System.Drawing.Point(111, 82);
+            this.cancelDevBTN.Location = new System.Drawing.Point(110, 128);
             this.cancelDevBTN.Name = "cancelDevBTN";
             this.cancelDevBTN.Size = new System.Drawing.Size(75, 23);
             this.cancelDevBTN.TabIndex = 12;
@@ -148,7 +152,7 @@
             // 
             // saveDevBTN
             // 
-            this.saveDevBTN.Location = new System.Drawing.Point(16, 83);
+            this.saveDevBTN.Location = new System.Drawing.Point(15, 128);
             this.saveDevBTN.Name = "saveDevBTN";
             this.saveDevBTN.Size = new System.Drawing.Size(75, 23);
             this.saveDevBTN.TabIndex = 11;
@@ -224,7 +228,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(7, 25);
+            this.label1.Location = new System.Drawing.Point(12, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(38, 13);
             this.label1.TabIndex = 1;
@@ -246,7 +250,7 @@
             this.pwdGP.Controls.Add(this.txtPwd);
             this.pwdGP.Controls.Add(this.label6);
             this.pwdGP.Enabled = false;
-            this.pwdGP.Location = new System.Drawing.Point(13, 511);
+            this.pwdGP.Location = new System.Drawing.Point(12, 551);
             this.pwdGP.Name = "pwdGP";
             this.pwdGP.Size = new System.Drawing.Size(775, 80);
             this.pwdGP.TabIndex = 3;
@@ -304,11 +308,29 @@
             this.label6.TabIndex = 0;
             this.label6.Text = "Mot de passe : ";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 86);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(56, 13);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Filtrer par :";
+            // 
+            // cbFiltre
+            // 
+            this.cbFiltre.FormattingEnabled = true;
+            this.cbFiltre.Location = new System.Drawing.Point(68, 83);
+            this.cbFiltre.Name = "cbFiltre";
+            this.cbFiltre.Size = new System.Drawing.Size(214, 21);
+            this.cbFiltre.TabIndex = 14;
+            this.cbFiltre.SelectedValueChanged += new System.EventHandler(this.cbFiltre_SelectedValueChanged);
+            // 
             // FrmHabilitations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 595);
+            this.ClientSize = new System.Drawing.Size(800, 643);
             this.Controls.Add(this.pwdGP);
             this.Controls.Add(this.addDev);
             this.Controls.Add(this.developpersGroup);
@@ -353,6 +375,8 @@
         private System.Windows.Forms.Button savePwdBTN;
         private System.Windows.Forms.Button cancelDevBTN;
         private System.Windows.Forms.Button saveDevBTN;
+        private System.Windows.Forms.ComboBox cbFiltre;
+        private System.Windows.Forms.Label label8;
     }
 }
 
