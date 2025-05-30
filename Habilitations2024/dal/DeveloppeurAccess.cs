@@ -15,11 +15,11 @@ namespace Habilitations2024.dal
         {
             access = Access.GetInstance();
         }
-        
+
         public List<Developpeur> GetLesDeveloppeurs()
         {
             List<Developpeur> lesDeveloppeurs = new List<Developpeur>();
-            if(access.Manager != null)
+            if (access.Manager != null)
             {
                 string requete = "SELECT d.iddeveloppeur as iddeveloppeur, d.nom as nom, d.prenom as prenom, d.tel as tel, d.mail as mail, p.idprofil as idprofil, p.nom as profil ";
                 requete += "FROM developpeur d join profil p on (d.idprofil = p.idprofil) ";
@@ -28,7 +28,7 @@ namespace Habilitations2024.dal
                 try
                 {
                     List<Object[]> resultats = access.Manager.ReqSelect(requete);
-                    if(resultats != null)
+                    if (resultats != null)
                     {
                         foreach (Object[] resultat in resultats)
                         {
@@ -38,7 +38,7 @@ namespace Habilitations2024.dal
                         }
                     }
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Console.WriteLine("Erreur lors de la récupération des développeurs : " + e.Message);
                     Environment.Exit(0);
@@ -70,7 +70,7 @@ namespace Habilitations2024.dal
 
         public void AddDeveloppeur(Developpeur developpeur)
         {
-            if(access.Manager != null)
+            if (access.Manager != null)
             {
                 string requete = "INSERT INTO developpeur (nom, prenom, tel, mail, pwd, idprofil) ";
                 requete += "VALUES (@nom, @prenom, @tel, @mail, SHA2(@pwd, 256), @idprofil);";
@@ -98,7 +98,7 @@ namespace Habilitations2024.dal
         {
             if (access.Manager != null)
             {
-                string requete = "UPDATE developpeur SET nom = @nom, prenom = @prenom, tel = @tel, mail = @mail, pwd = SHA2(@pwd, 256), idprofil = @idprofil ";
+                string requete = "UPDATE developpeur SET nom = @nom, prenom = @prenom, tel = @tel, mail = @mail, idprofil = @idprofil ";
                 requete += "WHERE iddeveloppeur = @iddeveloppeur;";
                 Dictionary<string, object> parameters = new Dictionary<string, object>
                 {
@@ -107,7 +107,7 @@ namespace Habilitations2024.dal
                     { "@prenom", developpeur.Prenom },
                     { "@tel", developpeur.Tel },
                     { "@mail", developpeur.Mail },
-                    { "@pwd", developpeur.Pwd },
+                    //{ "@pwd", developpeur.Pwd },
                     { "@idprofil", developpeur.Profil.Idprofil }
                 };
                 try
@@ -124,7 +124,7 @@ namespace Habilitations2024.dal
 
         public void UpdatePwd(Developpeur developpeur)
         {
-            if(access.Manager != null)
+            if (access.Manager != null)
             {
                 string requete = "UPDATE developpeur SET pwd = SHA2(@pwd, 256) WHERE iddeveloppeur = @iddeveloppeur;";
                 Dictionary<string, object> parameters = new Dictionary<string, object>
@@ -142,6 +142,37 @@ namespace Habilitations2024.dal
                     Environment.Exit(0);
                 }
             }
+        }
+
+        public bool ControleAuthentification(Admin admin)
+        {
+            if (access.Manager != null)
+            {
+                string req = "select * from developpeur d join profil p on d.idprofil=p.idprofil ";
+                req += "where d.nom=@nom and d.prenom=@prenom and pwd=SHA2(@pwd, 256) and p.nom='admin';";
+                var parameters = new Dictionary<string, object>
+                {
+                    { "@nom", admin.Nom },
+                    { "@prenom", admin.Prenom },
+                    { "@pwd", admin.Pwd }
+                };
+                try
+                {
+                    List<Object[]> resultats = access.Manager.ReqSelect(req, parameters);
+
+                    if (resultats != null)
+                    {
+                        return (resultats.Count > 0);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Erreur lors de la vérification des droits : " + e.Message);
+                    Environment.Exit(0);
+                }
+                return false;
+            }
+            return false;
         }
     }
 }

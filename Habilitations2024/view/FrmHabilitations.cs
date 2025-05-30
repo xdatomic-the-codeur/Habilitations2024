@@ -134,6 +134,7 @@ namespace Habilitations2024.view
                     developpeur.Tel = txtTel.Text;
                     developpeur.Mail = txtMail.Text;
                     developpeur.Profil = profil;
+                    developpeur.Pwd = developpeur.Pwd;
                     controller.UpdateDeveloppeur(developpeur);
                 }
                 else
