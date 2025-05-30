@@ -28,10 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmHabilitations));
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.developpersGroup = new System.Windows.Forms.GroupBox();
+            this.passwordBTN = new System.Windows.Forms.Button();
+            this.deleteBTN = new System.Windows.Forms.Button();
             this.modifBTN = new System.Windows.Forms.Button();
             this.addDev = new System.Windows.Forms.GroupBox();
+            this.cancelDevBTN = new System.Windows.Forms.Button();
+            this.saveDevBTN = new System.Windows.Forms.Button();
             this.cbProfil = new System.Windows.Forms.ComboBox();
             this.txtMail = new System.Windows.Forms.TextBox();
             this.txtTel = new System.Windows.Forms.TextBox();
@@ -42,17 +47,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtNom = new System.Windows.Forms.TextBox();
-            this.deleteBTN = new System.Windows.Forms.Button();
-            this.passwordBTN = new System.Windows.Forms.Button();
             this.pwdGP = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtPwd = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtPwdConfirm = new System.Windows.Forms.TextBox();
-            this.savePwdBTN = new System.Windows.Forms.Button();
             this.cancelPwdBTN = new System.Windows.Forms.Button();
-            this.saveDevBTN = new System.Windows.Forms.Button();
-            this.cancelDevBTN = new System.Windows.Forms.Button();
+            this.savePwdBTN = new System.Windows.Forms.Button();
+            this.txtPwdConfirm = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtPwd = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.developpersGroup.SuspendLayout();
             this.addDev.SuspendLayout();
@@ -84,6 +85,26 @@
             this.developpersGroup.TabStop = false;
             this.developpersGroup.Text = "Les développeurs";
             // 
+            // passwordBTN
+            // 
+            this.passwordBTN.Location = new System.Drawing.Point(194, 331);
+            this.passwordBTN.Name = "passwordBTN";
+            this.passwordBTN.Size = new System.Drawing.Size(89, 23);
+            this.passwordBTN.TabIndex = 3;
+            this.passwordBTN.Text = "changer pwd";
+            this.passwordBTN.UseVisualStyleBackColor = true;
+            this.passwordBTN.Click += new System.EventHandler(this.passwordBTN_Click);
+            // 
+            // deleteBTN
+            // 
+            this.deleteBTN.Location = new System.Drawing.Point(99, 331);
+            this.deleteBTN.Name = "deleteBTN";
+            this.deleteBTN.Size = new System.Drawing.Size(75, 23);
+            this.deleteBTN.TabIndex = 2;
+            this.deleteBTN.Text = "Supprimer";
+            this.deleteBTN.UseVisualStyleBackColor = true;
+            this.deleteBTN.Click += new System.EventHandler(this.deleteBTN_Click);
+            // 
             // modifBTN
             // 
             this.modifBTN.Location = new System.Drawing.Point(7, 331);
@@ -114,6 +135,26 @@
             this.addDev.TabIndex = 2;
             this.addDev.TabStop = false;
             this.addDev.Text = "Ajouter développeur";
+            // 
+            // cancelDevBTN
+            // 
+            this.cancelDevBTN.Location = new System.Drawing.Point(111, 82);
+            this.cancelDevBTN.Name = "cancelDevBTN";
+            this.cancelDevBTN.Size = new System.Drawing.Size(75, 23);
+            this.cancelDevBTN.TabIndex = 12;
+            this.cancelDevBTN.Text = "Annuler";
+            this.cancelDevBTN.UseVisualStyleBackColor = true;
+            this.cancelDevBTN.Click += new System.EventHandler(this.cancelDevBTN_Click);
+            // 
+            // saveDevBTN
+            // 
+            this.saveDevBTN.Location = new System.Drawing.Point(16, 83);
+            this.saveDevBTN.Name = "saveDevBTN";
+            this.saveDevBTN.Size = new System.Drawing.Size(75, 23);
+            this.saveDevBTN.TabIndex = 11;
+            this.saveDevBTN.Text = "Enregistrer";
+            this.saveDevBTN.UseVisualStyleBackColor = true;
+            this.saveDevBTN.Click += new System.EventHandler(this.saveDevBTN_Click);
             // 
             // cbProfil
             // 
@@ -196,26 +237,6 @@
             this.txtNom.Size = new System.Drawing.Size(214, 20);
             this.txtNom.TabIndex = 0;
             // 
-            // deleteBTN
-            // 
-            this.deleteBTN.Location = new System.Drawing.Point(99, 331);
-            this.deleteBTN.Name = "deleteBTN";
-            this.deleteBTN.Size = new System.Drawing.Size(75, 23);
-            this.deleteBTN.TabIndex = 2;
-            this.deleteBTN.Text = "Supprimer";
-            this.deleteBTN.UseVisualStyleBackColor = true;
-            this.deleteBTN.Click += new System.EventHandler(this.deleteBTN_Click);
-            // 
-            // passwordBTN
-            // 
-            this.passwordBTN.Location = new System.Drawing.Point(194, 331);
-            this.passwordBTN.Name = "passwordBTN";
-            this.passwordBTN.Size = new System.Drawing.Size(89, 23);
-            this.passwordBTN.TabIndex = 3;
-            this.passwordBTN.Text = "changer pwd";
-            this.passwordBTN.UseVisualStyleBackColor = true;
-            this.passwordBTN.Click += new System.EventHandler(this.passwordBTN_Click);
-            // 
             // pwdGP
             // 
             this.pwdGP.Controls.Add(this.cancelPwdBTN);
@@ -232,37 +253,14 @@
             this.pwdGP.TabStop = false;
             this.pwdGP.Text = "Changer le mot de passe";
             // 
-            // label6
+            // cancelPwdBTN
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(13, 20);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(80, 13);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Mot de passe : ";
-            // 
-            // txtPwd
-            // 
-            this.txtPwd.Location = new System.Drawing.Point(99, 17);
-            this.txtPwd.Name = "txtPwd";
-            this.txtPwd.Size = new System.Drawing.Size(130, 20);
-            this.txtPwd.TabIndex = 1;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(268, 20);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(120, 13);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Répéter mot de passe : ";
-            // 
-            // txtPwdConfirm
-            // 
-            this.txtPwdConfirm.Location = new System.Drawing.Point(390, 17);
-            this.txtPwdConfirm.Name = "txtPwdConfirm";
-            this.txtPwdConfirm.Size = new System.Drawing.Size(131, 20);
-            this.txtPwdConfirm.TabIndex = 3;
+            this.cancelPwdBTN.Location = new System.Drawing.Point(111, 49);
+            this.cancelPwdBTN.Name = "cancelPwdBTN";
+            this.cancelPwdBTN.Size = new System.Drawing.Size(75, 23);
+            this.cancelPwdBTN.TabIndex = 5;
+            this.cancelPwdBTN.Text = "Annuler";
+            this.cancelPwdBTN.UseVisualStyleBackColor = true;
             // 
             // savePwdBTN
             // 
@@ -274,34 +272,37 @@
             this.savePwdBTN.UseVisualStyleBackColor = true;
             this.savePwdBTN.Click += new System.EventHandler(this.savePwdBTN_Click);
             // 
-            // cancelPwdBTN
+            // txtPwdConfirm
             // 
-            this.cancelPwdBTN.Location = new System.Drawing.Point(111, 49);
-            this.cancelPwdBTN.Name = "cancelPwdBTN";
-            this.cancelPwdBTN.Size = new System.Drawing.Size(75, 23);
-            this.cancelPwdBTN.TabIndex = 5;
-            this.cancelPwdBTN.Text = "Annuler";
-            this.cancelPwdBTN.UseVisualStyleBackColor = true;
+            this.txtPwdConfirm.Location = new System.Drawing.Point(390, 17);
+            this.txtPwdConfirm.Name = "txtPwdConfirm";
+            this.txtPwdConfirm.Size = new System.Drawing.Size(131, 20);
+            this.txtPwdConfirm.TabIndex = 3;
             // 
-            // saveDevBTN
+            // label7
             // 
-            this.saveDevBTN.Location = new System.Drawing.Point(16, 83);
-            this.saveDevBTN.Name = "saveDevBTN";
-            this.saveDevBTN.Size = new System.Drawing.Size(75, 23);
-            this.saveDevBTN.TabIndex = 11;
-            this.saveDevBTN.Text = "Enregistrer";
-            this.saveDevBTN.UseVisualStyleBackColor = true;
-            this.saveDevBTN.Click += new System.EventHandler(this.saveDevBTN_Click);
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(268, 20);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(120, 13);
+            this.label7.TabIndex = 2;
+            this.label7.Text = "Répéter mot de passe : ";
             // 
-            // cancelDevBTN
+            // txtPwd
             // 
-            this.cancelDevBTN.Location = new System.Drawing.Point(111, 82);
-            this.cancelDevBTN.Name = "cancelDevBTN";
-            this.cancelDevBTN.Size = new System.Drawing.Size(75, 23);
-            this.cancelDevBTN.TabIndex = 12;
-            this.cancelDevBTN.Text = "Annuler";
-            this.cancelDevBTN.UseVisualStyleBackColor = true;
-            this.cancelDevBTN.Click += new System.EventHandler(this.cancelDevBTN_Click);
+            this.txtPwd.Location = new System.Drawing.Point(99, 17);
+            this.txtPwd.Name = "txtPwd";
+            this.txtPwd.Size = new System.Drawing.Size(130, 20);
+            this.txtPwd.TabIndex = 1;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(13, 20);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(80, 13);
+            this.label6.TabIndex = 0;
+            this.label6.Text = "Mot de passe : ";
             // 
             // FrmHabilitations
             // 
@@ -311,6 +312,7 @@
             this.Controls.Add(this.pwdGP);
             this.Controls.Add(this.addDev);
             this.Controls.Add(this.developpersGroup);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmHabilitations";
             this.Text = "Habilitations 2024";
             this.Load += new System.EventHandler(this.Form1_Load);
